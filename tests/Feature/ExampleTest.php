@@ -12,8 +12,11 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+    /** @test */   
     public function testBasicTest()
     {
+        // $this->json('GET','api/tag');
+
         $response = $this->get('/');
 
         $response->assertStatus(200);

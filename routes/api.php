@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/tag', [TagController::class, 'tagList']);
+Route::post('/tag', [TagController::class, 'store']);
+Route::get('/tag/{tag}', [TagController::class, 'show']);
+Route::get('/tag/courses', [TagController::class, 'tagShowAllCourse']);
+
+// Listar cursos 
+Route::get('/course', [CourseController::class, 'courseList']);
+// Crear curso
+Route::post('/course', [CourseController::class, 'store']);

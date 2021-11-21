@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'tag_name'
+    ];
+
     public function tagCourse(){
         return $this->hasMany(Course::class);
     }

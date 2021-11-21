@@ -16,10 +16,7 @@ class CourseTest extends TestCase
             'name' => 'abcdefghij',
             'description' => 'abcdefghij',
         ]);
-        $course->assertDatabaseHas('courses',[
-            'name' => 'abcdefghij',
-            'description' => 'abcdefghij',
-        ]);
+        $this->assertDatabaseHas('courses',$course->json()['data']);
     }
     /** @test */   
     public function testMaxNameCourse()
@@ -28,10 +25,7 @@ class CourseTest extends TestCase
             'name' => 'abcdefghijklmnopqrsm',
             'description' => 'abcdefghijklmnopqrsm',
         ]);
-        $course->assertDatabaseHas('courses',[
-            'name' => 'abcdefghijklmnopqrsm',
-            'description' => 'abcdefghijklmnopqrsm',
-        ]);
+        $this->assertDatabaseHas('courses',$course->json()['data']);
 
     }
     /** @test */   
@@ -42,10 +36,7 @@ class CourseTest extends TestCase
             'description' => 'abcdefghi',
         ]);
         $course->assertJsonStructure([
-            'res',
-            'data' => [
-                'error',
-            ],
+            'message',
         ]);
 
     }
@@ -57,11 +48,8 @@ class CourseTest extends TestCase
             'description' => 'abcdefghi',
         ]);
         $course->assertJsonStructure([
-            'res',
-            'data' => [
-                'error',
-            ],
-        ]);        
+            'message',
+        ]);
     }
 
 
@@ -72,10 +60,7 @@ class CourseTest extends TestCase
             'name' => 'abcdefghijklmno',
             'description' => 'abcdefghijklmnopqrsm',
         ]);
-        $course->assertDatabaseHas('courses',[
-            'name' => 'abcdefghijklmno',
-            'description' => 'abcdefghijklmnopqrsm',
-        ]);        
+        $this->assertDatabaseHas('courses',$course->json()['data']);
     }   
     /** @test */   
     public function testListCourse()

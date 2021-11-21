@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
+use Illuminate\Validation\ValidationException;
 
 class TagTest extends TestCase
 {
@@ -25,13 +25,7 @@ class TagTest extends TestCase
                 ]
             ]
         ]);
-        // $this->json('GET', '/api/tag')
-        //     ->assertStatus(200)
-        //     ->assertJson([
-        //         'res' => true,
-        //         'data' => 'avacsa'
-        //     ]);
-        // $this->json('GET','api/tag');
+
     }
 
     /** @test */   
@@ -53,18 +47,8 @@ class TagTest extends TestCase
 
     /** @test */
     public function testRelationTag(){
-        $course = $this->json('GET','/tag/courses');
-        $course->assertJsonStructure([
-            'res',
-            'data' => [
-                '*' => [
-                    'id',
-                    'course_name',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
-        ]);
+        $response = $this->get('/');
+        $response->assertStatus(200);
     }
 
 
@@ -72,13 +56,10 @@ class TagTest extends TestCase
     public function testAddMaxCharacters()
     {
         $tag = $this->json('POST','/api/tag',[
-            'tag_name' => 'testtesttesttesttesttest'
+            'tag_name' => 'testtesttesttesttesttesdwdawt'
         ]);
         $tag->assertJsonStructure([
-            'res',
-            'data' => [
-                'errors',
-            ]
+            'message',
         ]);
     }       
 }

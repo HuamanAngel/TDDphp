@@ -15,23 +15,37 @@ class TagController extends Controller
     public function tagList()
     {
         $tags = Tag::all();
-        // return response()->json([
-        //     'res'=>true,
-        //     'data'=>$tags
-        // ]);
-        // return 0;
+        return response()->json([
+            'res'=>true,
+            'data'=>$tags
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'tag_name' => 'required|string|max:20',
+        ]);
+        $tag = Tag::create([
+            'tag_name'=>$request->tag_name
+        ]);
+        return response()->json([
+            'res'=>true,
+            'data'=>$tag
+        ]);
     }
 
-    public function show(Tag $tag)
-    {
-        //
-    }
     public function tagShowAllCourse(){
-        //
+        $tags = Tag::all();
+        $courses = [];
+        foreach($tags as $tag){
+            $courses[]=$tag->tagCourse;
+        }
+
+        return response()->json([
+            'res'=>true,
+            'data'=>$courses
+        ]);        
     }
 }
